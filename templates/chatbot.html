@@ -3,10 +3,13 @@
 
 <div class="chatbox">
     <div class="display">
-        display
+        {{ message }}
     </div>
     <div class="chatter">
-        chatter
+        <form method="post">
+            <textarea placeholder="Type message.." name="msg" required></textarea>
+            <button type="submit" class="btn">Send</button>
+        </form>
     </div>
 </div>
 
