@@ -1,3 +1,7 @@
+# Visit these link
+Link: [To the website] (https://obscure-beach-89826.herokuapp.com/home)
+Video : [To Video Demonstration](https://youtu.be/p7Iu28lxXcY)
+
 # Panic Attacks
 When someone goes through a panic attack, it's not just racing thoughts and a worried expression etched on to their face. Often times, their heartbeat spikes up, they begin to hyperventilate, or they're feeling nauseous. And these are just three of the many symptoms it has.
 
@@ -14,5 +18,3 @@ When people are in a state of panic, they might not be in the state to ask someo
 Chatto eliminates the need to find techniques that work, people that can help you calm down or even the need to reach out to someone.
 
 
-# Visit the link
-Video : [To Video Demonstration](https://youtu.be/p7Iu28lxXcY)
