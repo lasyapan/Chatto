@@ -2,14 +2,16 @@
 {% block main %}
 
 <div class="chatbox">
+    <div class="chatto">Chatto</div>
     <div class="display">
         {{ message }}
     </div>
     <div class="chatter">
         <form method="post">
-            <textarea placeholder="Type message.." name="msg" required></textarea>
-            <button type="submit" class="btn">Send</button>
+            <input type="Type message..." name="msg" required>
+            <button type="submit" class="send-btn">Send</button>
         </form>
+        
     </div>
 </div>
 
