@@ -1,3 +1,4 @@
+from distutils.log import debug
 from flask import Flask, redirect, url_for, render_template, request
 import random 
 import json
@@ -74,4 +75,4 @@ def resources():
     return render_template("resources.html")
 
 if __name__ == '__main__':
-    app.run(host="https://reverent-roentgen-79f613.netlify.app/")
+    app.run(debug=true)
