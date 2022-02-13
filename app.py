@@ -1,172 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Ubuntu:wght@500&display=swap');
+from flask import Flask, redirect, url_for, render_template, request
+import random 
+import json
+import pickle 
+import numpy as np 
+import nltk
+from nltk.stem import WordNetLemmatizer
+import tensorflow.keras as keras
+from keras.models import load_model
+from flask_ngrok import run_with_ngrok
 
-html{
-    height: 100%;
-    font-family: 'Roboto Mono', monospace;
-    font-family: 'Ubuntu', sans-serif;
-}
-body{
-    background-image: url('backgroundfinal.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-    background-color: #0B0C10;
-    height: 100%;
-    margin: 0;
-}
-.navbar{
-    display: flex;
-    justify-content: end;
-    padding-top: 2vw;
-    margin-right: 2vw;
-}
-.nav-item{
-    margin-right: 2.5vh;
-}
-.logo{
-    height: 70px;
-    margin-right: auto;
-    margin-left: 2.5vh;
-}
-.nav-item button{
-    background-color: transparent;
-    border: none;
-    color: #F5F5F5;
-    font-size: 1.5vw;
-}
-.nav-item button:hover{
-    background-color: #66FCF1;
-    color: #0B0C10;
-    transition: .7s;
-}
-.main{
-    display: flex;
-    height: 90%;
-    flex-direction: column;
-    justify-content: center;
-}
-.welcome{
-    font-size: 8vw;
-    text-align: center;
-    color: #F5F5F5;
-}
-.intro{
-    font-size: 2vw;
-    text-align: center;
-    color: #F5F5F5;
-    padding: 2vw;
-}
-.action{
-    display: flex;
-    justify-content: space-evenly;
-}
-.action-btn button{
-    background-color: #1F2833;
-    color: #F5F5F5;
-    border: none;
-    border-radius: 40px;
-    height: 4vw;
-    width: 20vw;
-    font-size: 100%;
-}
-.action-btn button:hover{
-    background-color: #F5F5F5;
-    color: #1F2833;
-    transition: .5s;
-}
-.chatto{
-    text-align: center;
-    color: #F5F5F5;
-    font-size: 8vw;
-}
-.chatbox{
-    display: flex;
-    align-self: center;
-    justify-content: center;
-    flex-direction: column;
-    height:80%;
-    width: 70%;
-}
-.display, .chatter{
-    opacity: 0.8;
-    background-color: #1c1d21;
-    width:100%; 
-}
-.display{
-    display: flex;
-    height: 80%;
-    font-size: 2vw;
-    margin-bottom: 3%;
-    color: #F5F5F5;
-    text-align: center;
-    vertical-align: middle;
-    border: 3px solid #66FCF1;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-.chatter{
-    height:10%;
-    width: 100%;
-}
-form{
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
-input{
-    border: none;
-    background-color: #F5F5F5;
-    height: 100%;
-    width: 90%;
-}
-.send-btn{
-    height: 100%;
-    border: none;
-    background: transparent;
-    color: #F5F5F5;
-    width: 10%;
-}
-.send-btn:hover{
-    background: #F5F5F5;
-    color: #1c1d21;
-}
-.container{
-    margin-top: 40vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: end;
-}
-.info{
-    font-size: 2.5vw;
-    text-align: center;
-    color: #F5F5F5;
-    margin-top: 6vw;
-    margin-bottom: 20px;
-    width:90%
-}
-.resource{
-    opacity: 0.8;
-    background-color: #1c1d21;
-    height:80%;
-    width: 80%;
-    margin-bottom: 20px;
-    color: #F5F5F5;
-}
-.resourceTitleSpotify{
-    font-size: 3vw;
-}
-.resourceTitle button{
-    font-size: 3vw;
-    background-color: transparent;
-    color: #F5F5F5;
-    border: none;
-    height: 100%;
-    width: 100%;
-    text-align: left;
-}
-.resourceTitle button:hover{
-    background-color: #F5F5F5;
-    color: #1c1d21;
-    transition: .5s;
-}
+app = Flask(__name__)
+
+lemmatizer = WordNetLemmatizer()
+intents = json.loads(open('intents.json').read())
+
+words = pickle.load(open('words.pkl', 'rb'))
+classes = pickle.load(open('classes.pkl','rb'))
+model = load_model('chatbot_model.h5')
+
+def getResponse(ints, intents_json):
+    tag = ints[0]["intent"]
+    list_of_intents = intents_json["intents"]
+    for i in list_of_intents:
+        if i["tag"] == tag:
+            result = random.choice(i["responses"])
+            break
+    return result
+
+def clean_up_sentence(sentence):
+    sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
+    return sentence_words
+
+def bag_of_words(sentence):
+ sentence_words = clean_up_sentence(sentence)
+ bag = [0] * len(words)
+ for w in sentence_words:
+  for i, word in enumerate(words):
+      if word==w:
+          bag[i] = 1
+ return np.array(bag)
+
+def predict_class(sentence, model):
+    # filter out predictions below a threshold
+    p = bag_of_words(sentence)
+    res = model.predict(np.array([p]))[0]
+    ERROR_THRESHOLD = 0.25
+    results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
+    # sort by strength of probability
+    results.sort(key=lambda x: x[1], reverse=True)
+    return_list = []
+    for r in results:
+        return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
+    return return_list
+
+
+@app.route("/home")
+def landing():
+    return render_template("landing.html")
+    
+@app.route("/chatbot", methods=["POST","GET"])
+def chatbot():
+    if request.method == "POST":
+        message = request.form["msg"]
+        ints = predict_class(message, model)
+        res = getResponse(ints, intents)
+        return render_template("chatbot.html", message=res)
+    else:    
+        return render_template("chatbot.html")
+
+@app.route("/resources")
+def resources():
+    return render_template("resources.html")
+
+if __name__ == '__main__':
+    app.run(host="https://reverent-roentgen-79f613.netlify.app/")
