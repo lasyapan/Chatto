@@ -1,0 +1,70 @@
+{"intents": [
+    {"tag" : "greetings",
+    "patterns": ["hi", "hello", "good day", "what's up?", "greetings", "hey", "yo"],
+    "responses": ["Hi! What can I do for you?", "Hey!", "How are you doing today?", "Welcome!"]
+    },
+
+    {"tag" : "goodbye",
+        "patterns": ["bye", "cya", "see you", "goodbye"],
+        "responses": ["I hope we talk soon.", "I'm here for you anytime.", "Have a good day!", "Bye!"]
+        
+    },
+
+    {"tag" : "name",
+        "patterns": ["what is your name?", "what do i call you?", "whats your name?", "who are you?", "can you tell me who you are"],
+        "responses": ["I'm Chatto.", "You can call me Chatto", "My name is Chatto."]
+        
+    },
+
+    {"tag" : "FAQ",
+        "patterns": ["how does this work?", "how can i get started?", "what can you do?", "how can you help me?", "--help"],
+        "responses": ["I'm glad you asked! I'm a bot that primarily aims to help you calm down from panic attacks using CBT techniques to distract or relax you till you feel better. You also can keep track of your panic attacks in your Journal. An important thing to note is that you use the following phrases in your replies to immediately be given an exercise that can help you: Breathing exercises, relaxation techniques, a game. This phrase can be included in your sentence at any time, and I will immediately reccomend you something to do. If you need a refresher on this, feel free to type in '--help'. Nice to meet you, and I hope I can help."]
+        
+    },
+
+    {"tag" : "not helping",
+        "patterns": ["this isn't helping", "this isn't working", "i don't want to keep talking", "this didn't help"],
+        "responses": ["I'm sorry I couldn't help you today. I just want you to know that this panic attack will end.", "I can understand if you're feeling worse. I'm here for you anytime."]
+    },
+
+    {"tag" : "known_panicattack",
+        "patterns": ["i think i'm having a panic attack", "i think i am having a panic attack", "i'm panicking", "i'm currently having an anxiety attack", "i'm having an anxiety attack", "i'm having a panic attack"],
+        "responses": ["That sounds awful. Are you feeling any physical symptoms like not being able to breathe or trembling?", "In case you're feeling any physical symptoms, do you want to try something to help you calm down? Reply with the full phrase so I know what you want me to do. You can pick from: Breathing exercises, Small conversation, a Game."]
+    },
+    
+    {"tag" : "panic attack symptoms",
+        "patterns": ["i can't breathe", "i feel like i'm going to throw up", "i cannot breathe", "i'm hyperventilating", "i am hyperventilating", "my fingers are shaking", "i can't feel my fingers", "i can't feel my toes", "my heart is pounding in my chest", "my heart is pounding", "i am trembling", "i feel nauseous", "i feel numb", "i'm going to faint", "i feel like i'm going to faint", "i feel dizzy", "i'm so dizzy"],
+        "responses": ["This sounds like a panic attack. Would you like a breathing exercise or a small activity to distract you? Reply with the full phrase so I know what you want me to do. You can pick from: Breathing exercises, relaxation techniques, a game.", "That sounds intense, I'm so sorry. I have a few ideas that might help you. Do you want to try any of them? Reply with the full phrase so I know what you want me to do. You can pick from: Breathing exercises, relaxation techniques, a game."]
+    },
+
+    {"tag": "breathing exercise",
+        "patterns": ["yes, i'd like a breathing exercise", "i would like a breathing exercise", "a breathing exercise", "breathing exercise"],
+        "responses": ["I'm going to introduce the 4-4-6 technique. I'd really like it if you could follow 3 steps. I want to give you the time to do it until you feel calmer, so here are the steps: 1. Breath in through your nose for 4 seconds. 2. Hold the breath in your lungs for 4 seconds. 3. Breath out through your mouth for 6 seconds.", "Let's give box breathing a try. I want you to follow these steps and reply when you're done, okay? Here they are: 1. Breathe in through the nose while counting to four. Continue inhaling for the entire 4 seconds. The breath should be slow and steady. 2. Hold the breath in the lungs for another count of four. 3. Exhale through the mouth while counting to four. As with the inhale, the exhale should be slow and steady. 4. Continue repeating this pattern for 4 minutes.", "One of my ideas is something called alternative breathing. The steps go something like this: 1. Hold your right hand up. 2. Place the tips of your index and middle fingers on your forehead. 3. Place your thumb on your right nostril and your other two fingers on your left one. 4. Breathe in through both nostrils. 5. Close one nostril, breathe out, and repeat with the other nostril closed. Keep doing this until you feel calmer. Did that help you?"]
+    },
+
+    {"tag": "helping",
+        "patterns": ["i want help", "i need help", "can you help me", "i want your help", "help me", "will you help me"],
+        "responses": ["I definitely can! What's wrong?", "How are you currently feeling today?", "Is everything okay? How are you doing?"]
+        },
+
+    {"tag": "relaxation exercise",
+        "patterns": ["relaxtion exercises", "i want a relaxtion exercise", "i'd like a relaxation exercise"],
+        "responses": ["I'm going to introduce the 5-4-3-2-1 technique. I'd like it if you could look around at your surroundings and tell me if you can: 5 things you can see around you. 4 things you can touch. 3 things you can hear. Two things that you can smell. One thing you can taste.", "Want to try the 3-3-3 grounding technique? Think of three things you can see, three things you can hear, and finally, move three parts of your body three times.", "I want you to close your eyes and think of a place that seems comforting to you. Any place. Seriously. Now, sit there and let the thoughts in your head pass through you. Don't interact with them, just let them pass by. Because this will end. You will get through this.", "We can try a progressive muscle relaxation technique. Feet: Curl your toes tightly into your feet, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Calves: Point your feet, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Thighs: Squeeze your thighs tightly together, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Torso: Tighten the muscles of your abdomen, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Back: Squeeze your shoulder blades together, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Shoulders: Lift your shoulders up toward your ears and squeeze them together, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Arms: Make fists and bend your arms, bringing your forearm toward your biceps and squeezing the muscles in the arms, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Hands: Make tight fists by curling your fingers into your palms, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Face: Scrunch your facial features and pull them toward the center of your face, hold for 5 seconds, then release.", "We can try a progressive muscle relaxation technique. Full body: Tighten and squeeze all the muscles in your body together at the same time, hold for 5 seconds, then release."]
+        },
+
+     {"tag": "game",
+        "patterns": ["a game", "game", "can we play a game?", "what about a game?"],
+        "responses": ["Have you heard of Wordle? You have 6 tries to guess a word, but it's not as easy as it sounds. https://www.powerlanguage.co.uk/wordle/", "You can't go wrong with Hangman. Give it a try: https://www.hangmanwords.com/play", "This is a fun one. The Higher Lower game is simple: Just choose the thing that gets googled more. http://www.higherlowergame.com/", "Try a jigsaw puzzle from here: https://www.dailyjigsawpuzzles.net/"]
+        },
+
+    {"tag": "journal prompt",
+        "patterns": ["thank you for this", "i feel better now", "i don't feel sick anymore", "i don't feel ill anymore", "i am not panicking anymore", "i am not feeling anxious anymore", "i'm no longer panicking", "i'm much better now", "i'm okay now", "thank you, that helped"],
+        "responses": ["I hope I've helped you, but I want you to know that journalling your thoughts can realy help. If you'd like to access your journal to look over your past entries or make a new one, you should! Or we can try another technique to help calm you down even more. Remember that you will always be able to get through this. And it takes one strong person to be able to do what you've just done."]
+        },
+
+    {"tag": "stop activity",
+        "patterns": ["stop", "please stop", "done"],
+        "responses": ["Noted. Anything you want to do next?"]
+    }
+]
+} 
