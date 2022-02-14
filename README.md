@@ -1,4 +1,4 @@
-# Visit these link
+# Visit these links
 Link: [To the website](https://obscure-beach-89826.herokuapp.com/home)
 
 Video : [To Video Demonstration](https://youtu.be/p7Iu28lxXcY)
